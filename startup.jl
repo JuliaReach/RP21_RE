@@ -20,8 +20,8 @@ function main()
     println("###\nRunning SEIR model\n###")
     include("models/SEIR/SEIR.jl")
 
-    println("###\nRunning Burguers model\n###")
-    include("models/Burguers/Burguers.jl")
+    println("###\nRunning Burgers model\n###")
+    include("models/Burgers/Burgers.jl")
 
     print(io, "\n")
     println("Finished running benchmarks, results stored in $TARGET_FOLDER")
