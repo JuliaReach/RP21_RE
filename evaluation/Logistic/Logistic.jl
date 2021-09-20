@@ -115,7 +115,7 @@ function figure_1a()
 end
 
 fig = figure_1a()
-savefig(fig, "figure_1a.pdf")
+savefig(fig, joinpath(TARGET_FOLDER, "figure_1a.pdf"))
 
 # ============
 # Figure 1b
@@ -163,4 +163,4 @@ function figure_1b()
 end
 
 fig = figure_1b()
-savefig(fig, "figure_1b.pdf")
+savefig(fig, joinpath(TARGET_FOLDER, "figure_1b.pdf"))
