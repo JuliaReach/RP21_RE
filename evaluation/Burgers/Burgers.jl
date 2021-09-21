@@ -69,22 +69,6 @@ end
 # ====================
 
 using DynamicPolynomials
-using MultivariatePolynomials
-
-# FIXME refactor to RA / CarlemanLinearization
-function ___findfirst(y::Vector{<:AbstractMonomialLike}, x)
-    ypow = powers.(y)
-
-    xvars = variables(x)
-    xpow = exponents(x)
-
-    for (i, pi) in enumerate(ypow)
-        if pi.is[1] == xvars && pi.is[2] == xpow
-            return i
-        end
-    end
-    return nothing
-end
 
 # we remove the endpoints
 function burguers_carlin(nf)
@@ -104,17 +88,17 @@ function burguers_carlin(nf)
     x, = @polyvar x[1:n]
     y = kron(x, x)
 
-    idx = ___findfirst(y, x[2]^2)
+    idx = findfirst(y, x[2]^2)
     F2[1, idx] = 1.0
 
-    idx = ___findfirst(y, x[n]^2)
+    idx = findfirst(y, x[n]^2)
     F2[n, idx] = -1.0
 
     for i in 2:n-1
-        idx = ___findfirst(y, x[i-1]^2)
+        idx = findfirst(y, x[i-1]^2)
         F2[i, idx] = -1.0
 
-        idx = ___findfirst(y, x[i+1]^2)
+        idx = findfirst(y, x[i+1]^2)
         F2[i, idx] = 1.0
     end
     F2 .*= -c2
