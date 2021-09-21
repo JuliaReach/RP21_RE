@@ -4,11 +4,7 @@
 using ReachabilityAnalysis, CarlemanLinearization
 using Plots, LaTeXStrings, LinearAlgebra, SparseArrays
 using Plots.PlotMeasures
-using IntervalArithmetic
 using DifferentialEquations
-
-const IA = IntervalArithmetic
-using LazySets: Interval
 
 using CarlemanLinearization: _error_bound_specabs_R
 
@@ -26,14 +22,7 @@ U0 = 1.0
 Re = 20
 ν = U0 * L0 / Re
 Tnl = L0 / U0
-
-Tmax = Tnl/2;
-
-#n = 12       # discretization points, which is 16 in Liu et al's article
-#nf = n - 2   # free degrees of freedom
-#Δx = L0/(n-1)
-#c1 = ν/Δx^2
-#c2 = 1/(4Δx)
+Tmax = Tnl/2
 
 # ================================
 # Spatial flowpipe visualization
@@ -49,13 +38,11 @@ function flowpipe_spatial(sol, t, n)
     xdomred = xdom[2:end-1]
 
     X = [set(overapproximate(Projection(solt, i:i), Interval)) for i in 1:dim(sol)]
-    # also: convert(IntervalBox, box_approximation(solt)) # similar..
-
-    R = ReachSet(CartesianProductArray(X), tspan(solt));
+    R = ReachSet(CartesianProductArray(X), tspan(solt))
     arr = [Interval(xdomred[i]) × CartesianProductArray(X).array[i] for i in 1:length(xdomred)]
     arr = vcat(Interval(xdom[1]) × Interval(0), arr, Interval(xdom[end]) × Interval(0))
-    U = UnionSetArray(arr);
-    Uch = [ConvexHull(U.array[i], U.array[i+1]) for i in 1:length(U.array)-1] |> UnionSetArray;
+    U = UnionSetArray(arr)
+    Uch = [ConvexHull(U.array[i], U.array[i+1]) for i in 1:length(U.array)-1] |> UnionSetArray
 
     return Uch
 end
@@ -67,9 +54,6 @@ end
     local Δx = L0/(n-1)
     local c1 = ν/Δx^2
     local c2 = 1/(4Δx)
-
-    #du[1] = zero(u[1])
-    #du[n] = zero(u[n])
 
     du[1] = c1*(-2*u[1]+u[2]) - c2*(u[2]^2)
     du[nf] = c1*(u[nf-1]-2*u[nf]) - c2*(-u[nf-1]^2)
