@@ -6,6 +6,7 @@ using ReachabilityAnalysis, CarlemanLinearization
 using Plots, LaTeXStrings, LinearAlgebra, SparseArrays
 using Plots.PlotMeasures
 
+using LazySets: center
 using CarlemanLinearization: _error_bound_specabs_R
 
 include("../utils.jl")
@@ -55,7 +56,7 @@ sol_a = f_analytic.(tsp, u0)
 # solution with Carleman, discrete time
 function sol_carlin_discrete_time(; N)
     A = logistic(r=r, K=K, N=N)
-    y0 = mid.(kron_pow_stack(x0, N)) |> Singleton
+    y0 = center(kron_pow_stack(x0, N)) |> Singleton
     prob = @ivp(y' = A * y, y(0) ∈ y0, dim=N)
 
     return solve(prob, T=Tmax, alg=ORBIT(δ=0.5, approx_model=NoBloating()))
