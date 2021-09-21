@@ -69,13 +69,6 @@ function sol_carlin_continuous_time(; N)
     return _solve_CARLIN(x0set, F1, F2; alg=alg, N=N, T=Tmax, bloat=false)
 end
 
-# =================
-# Runtimes
-# =================
-
-#prob = @ivp(x' = logistic!(x), x(0) ∈ x0, dim=1)
-#@time sol_tm = solve(prob, T=5.0, alg=TMJets(abstol=1e-10), ensemble=true, include_vertices=true, trajectories=1, reltol=1e-12, abstol=1e-12);
-
 # ============
 # Figure 1a
 # ============

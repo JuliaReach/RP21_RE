@@ -3,7 +3,7 @@
 #Pkg.activate(@__DIR__)
 #Pkg.instantiate()
 
-const TARGET_FOLDER = "result"
+const TARGET_FOLDER = "results"
 const RESULTS_FILE = "results.csv"
 
 function main()
@@ -12,15 +12,15 @@ function main()
     end
     global io = open(joinpath(TARGET_FOLDER, RESULTS_FILE), "w")
 
-    println("Running evaluation...\n")
+    println("Running evaluation...")
 
-    println(">>> Running Logistic model\n")
+    println(">>> Running Logistic model")
     include("evaluation/Logistic/Logistic.jl")
 
-    println(">>> Running SEIR model\n")
+    println(">>> Running SEIR model")
     include("evaluation/SEIR/SEIR.jl")
 
-    println(">>> Running Burgers model\n")
+    println(">>> Running Burgers model")
     include("evaluation/Burgers/Burgers.jl")
 
     println("Finished running evaluation. Results stored in $TARGET_FOLDER")

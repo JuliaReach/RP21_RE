@@ -163,8 +163,7 @@ function _solve_burgers_carlin(; n, N, width0=0, δ=0.02)
     # amodel = Forward(inv=true, setops=:lazy, sih=:concrete) # FIXME set options
     alg = LGG09(δ=δ, template=dirs, approx_model=Forward())
 
-    @time sol_carlin = _solve_CARLIN(X0, F1, F2; alg=alg, N=N, T=Tmax, bloat=false, kron_pow_algorithm="symbolic");
-
+    sol_carlin = _solve_CARLIN(X0, F1, F2; alg=alg, N=N, T=Tmax, bloat=false, kron_pow_algorithm="symbolic");
     sol_carlin_spatial = flowpipe_spatial(sol_carlin, Tnl/2, n);
 end
 
@@ -186,9 +185,7 @@ function _solve_burgers_TM(; n, width0=0)
     end
 
     prob = IVP(BlackBoxContinuousSystem(burgers!, nf), X0)
-    println("start TM sol")
-    @time solTM = solve(prob, tspan=(0.0, Tmax), alg=TMJets20(), ensemble=true, trajectories=1);
-    println("end TM sol")
+    solTM = solve(prob, tspan=(0.0, Tmax), alg=TMJets20(), ensemble=true, trajectories=1);
     solzTM = overapproximate(solTM, Zonotope);
 
     sol_spatial = flowpipe_spatial(solzTM, Tnl/2, n);
@@ -206,7 +203,28 @@ end
 # Results
 # ================================
 
-# runtime
+n = 10
+
+# Initial point
+_solve_burgers_TM(n=n); tt = @elapsed _solve_burgers_TM(n=n)
+print(io, "Burgers, TMJets, initial point, -, $(tt)\n")
+
+_solve_burgers_carlin(n=n, N=2, δ=0.01); tt = @elapsed _solve_burgers_carlin(n=n, N=2, δ=0.01)
+print(io, "Burgers, Carleman, initial point, N=2, $(tt)\n")
+
+_solve_burgers_carlin(n=n, N=3, δ=0.01); tt = @elapsed _solve_burgers_carlin(n=n, N=3, δ=0.01)
+print(io, "Burgers, Carleman, initial point, N=3, $(tt)\n")
+
+# Initial set
+width0 = 0.03
+_solve_burgers_TM(n=n, width0=width0); tt = @elapsed _solve_burgers_TM(n=n, width0=width0)
+print(io, "Burgers, TMJets, initial set, -, $(tt)\n")
+
+_solve_burgers_carlin(n=n, N=2, δ=0.01, width0=width0); tt = @elapsed _solve_burgers_carlin(n=n, N=2, δ=0.01, width0=width0)
+print(io, "Burgers, Carleman, initial set, N=2, $(tt)\n")
+
+_solve_burgers_carlin(n=n, N=3, δ=0.01, width0=width0); tt = @elapsed _solve_burgers_carlin(n=n, N=3, δ=0.01, width0=width0)
+print(io, "Burgers, Carleman, initial set, N=3, $(tt)\n")
 
 # ==================
 # Figures
@@ -253,7 +271,7 @@ function figure_burger_point()
 end
 
 fig = figure_burger_point()
-savefig(fig, "figure_burger_point.pdf")
+savefig(fig, joinpath(TARGET_FOLDER, "figure_burger_point.pdf"))
 
 # ==================
 # initial set
@@ -267,7 +285,7 @@ function figure_burger_set()
                guidefontsize=25,
                xguidefont=font(35, "Times"),
                yguidefont=font(35, "Times"),
-               xtick = if trajectories == -1xticklatex([-0.50, -0.25, 0.0, 0.25, 0.50], 2),
+               xtick = xticklatex([-0.50, -0.25, 0.0, 0.25, 0.50], 2),
                ytick = xticklatex([-1.0, -0.5, 0.0, 0.5, 1.0], 2),
                xlims=(-0.5, 0.5),
                ylims=(-1.05, 1.0),
@@ -300,4 +318,4 @@ function figure_burger_set()
 end
 
 fig = figure_burger_set()
-savefig(fig, "figure_burger_set.pdf")
+savefig(fig, joinpath(TARGET_FOLDER, "figure_burger_set.pdf"))
