@@ -98,9 +98,7 @@ function figure_1a()
 
     plot!(fig, sol_discr_N1, vars=(0, 1), lab=L"N=1", seriestype=:path, linestyle=:dash, c=:green, markersize=8, markershape=:circle, lw=2.0, alpha=1.)
     plot!(fig, sol_discr_N2, vars=(0, 1), lab=L"N=2", seriestype=:path, linestyle=:dash, c=:red, markersize=8, markershape=:utriangle, lw=2.0, alpha=1.)
-    #plot!(fig, sol_discr_N3, vars=(0, 1), lab="N=3", seriestype=:path, c=:red, marker=:circle, lw=2.0, alpha=1.)
     plot!(fig, sol_discr_N4, vars=(0, 1), lab=L"N=4", seriestype=:path, linestyle=:dash, c=:blue, markersize=8, markershape=:rect, lw=2.0, alpha=1.)
-    #plot!(fig, sol_discr_N5, vars=(0, 1), lab="N=5", seriestype=:path, c=:blue, marker=:star, alpha=1.)
 
     plot!(fig, sol_discr_N6, vars=(0, 1), lab=L"N=6", seriestype=:path, linestyle=:dash, c=:orange, markersize=8, markershape=:star, lw=2.0, alpha=1.)
 

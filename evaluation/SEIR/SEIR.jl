@@ -184,8 +184,6 @@ function figure_seir()
            xticks=xticklatex([18., 20., 22.], 2),
            yticks=([7.5e4, 1.25e5, 1.75e5], [L"0.075", L"0.125", L"0.175"]))
 
-    #plot!(fig, ensemble(sol_tm_traj), c=:grey, ls=:solid, alpha=1., lw=0.5, lab="")
-
     return fig
 end
 
@@ -202,12 +200,6 @@ function figure_seir_errors()
     solN5 = _solve_seir_carlin(N=N, T=Tmax, δ=0.1, radius0=rr0, bloat=false);
 
     solN5bloat = _solve_seir_carlin(N=N, T=Tmax, δ=0.1, radius0=rr0, bloat=true, resets=[4.0]);
-
-    # taylor models solution
-    #sol_tm = _solve_seir_carlin_TM(T=Tmax, radius0=rr0)
-
-    # trajectories
-    #sol_tm_traj = _solve_seir_carlin_TM(T=Tmax, radius0=rr0, trajectories=5)
 
     fig = plot(legend=:topright, xlab=L"\textrm{Time (days)}", ylab=L"\textrm{Individuals } (\times 10^6)",
                legendfontsize=25,
@@ -227,19 +219,13 @@ function figure_seir_errors()
 
     plot!(fig, solN5bloat, vars=(0, 1), lab=L"err(S)", alpha=1., c=:blue, lc=:blue)
 
-    #plot!(fig, sol_tm, vars=(0, 1), lab=L"err(S)", alpha=1., c=:aquamarine, lc=:aquamarine)
-
     plot!(fig, solN5bloat, vars=(0, 2), lab=L"err(E)", alpha=1., c=:red, lc=:red)
-
-    #plot!(fig, sol_tm, vars=(0, 2), lab=L"E~(TM)", alpha=1., c=:darksalmon, lc=:darksalmon)
 
     plot!(fig, solN5bloat, vars=(0, 3), lab=L"err(I)", alpha=1., c=:orange, lc=:orange)
 
     plot!(fig, solN5, vars=(0, 1), lab=L"S~(N = %$N)", alpha=1., c=:aquamarine, lc=:aquamarine)
     plot!(fig, solN5, vars=(0, 2), lab=L"E~(N = %$N)", alpha=1., c=:darksalmon, lc=:darksalmon)
     plot!(fig, solN5, vars=(0, 3), lab=L"I~(N = %$N)", alpha=1., c=:darkseagreen, lc=:darkseagreen)
-
-    #plot!(fig, sol_tm, vars=(0, 3), lab=L"I~(TM)", alpha=1., c=:darkseagreen, lc=:darkseagreen)
 
     ylims!(0, 6e6)
 
@@ -252,9 +238,6 @@ function figure_seir_errors()
            subplot=2,
            xticks=xticklatex([3.5, 4.0, 4.5], 2),
            yticks=([0.7e6, 1.0e6, 1.3e6], [L"0.7", L"1.0", L"1.3"]))
-
-
-    #plot!(fig, ensemble(sol_tm_traj), c=:grey, ls=:solid, alpha=1., lw=0.5, lab="")
 
     return fig
 end
