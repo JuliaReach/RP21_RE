@@ -92,7 +92,7 @@ function figure_1a()
                ytick=([0.0, 0.1, 0.2, 0.3, 0.4, 0.5], [L"0", L"0.1", L"0.2", L"0.3", L"0.4", L"0.5"]),
                xlims=(0.0, 10.1),
                ylims=(-0.01, 0.5),
-               bottom_margin=10mm, left_margin=2mm, right_margin=12mm, top_margin=3mm, size=(900, 600))
+               bottom_margin=10mm, left_margin=6mm, right_margin=6mm, top_margin=3mm, size=(900, 600))
 
     plot!(fig, tsp, sol_a, c=:magenta, lab=L"\textrm{Analytic}", lw=3.0, alpha=1.)
 
@@ -131,7 +131,7 @@ function figure_1b()
                ytick=([0.0, 0.1, 0.2, 0.3, 0.4, 0.5], [L"0", L"0.1", L"0.2", L"0.3", L"0.4", L"0.5"]),
                xlims=(0.0, 10.1),
                ylims=(-0.01, 0.6),
-               bottom_margin=10mm, left_margin=2mm, right_margin=12mm, top_margin=3mm, size=(900, 600))
+               bottom_margin=10mm, left_margin=6mm, right_margin=6mm, top_margin=3mm, size=(900, 600))
 
     tsp = range(0.0, Tmax, length=NSTEPS+1)
 

@@ -163,7 +163,7 @@ function figure_seir()
                         [L"0", L"1", L"2", L"3", L"4", L"5", L"6"]),
                xlims=(0, 30),
                ylims=(0, 6e6),
-               bottom_margin=10mm, left_margin=6mm, right_margin=12mm, top_margin=3mm, size=(900, 600))
+               bottom_margin=10mm, left_margin=6mm, right_margin=6mm, top_margin=3mm, size=(900, 600))
 
 
     # carleman linearization solution
@@ -212,7 +212,7 @@ function figure_seir_errors()
                         [L"0", L"1", L"2", L"3", L"4", L"5", L"6"]),
                xlims=(0, 30),
                ylims=(0, 6e6),
-               bottom_margin=10mm, left_margin=6mm, right_margin=12mm, top_margin=3mm, size=(900, 600))
+               bottom_margin=10mm, left_margin=6mm, right_margin=6mm, top_margin=3mm, size=(900, 600))
 
 
     # carleman linearization solution
