@@ -71,7 +71,7 @@ end
 using DynamicPolynomials
 
 # we remove the endpoints
-function burguers_carlin(nf)
+function burgers_carlin(nf)
     n = nf + 2
     Δx = L0/(n-1)
     c1 = ν/Δx^2
@@ -114,7 +114,7 @@ end
 function _solve_burgers_carlin(; n, N, width0=0, δ=0.02)
 
     nf = n-2
-    F1, F2 = burguers_carlin(nf)
+    F1, F2 = burgers_carlin(nf)
 
     A = build_matrix(F1, F2, N)
 
@@ -161,7 +161,7 @@ end
 
 function _get_R(; n)
     nf = n-2
-    F1, F2 = burguers_carlin(nf);
+    F1, F2 = burgers_carlin(nf);
     xdom = range(-L0/2, L0/2, length=n)
     x0 = -U0*sin.(2*π*xdom[2:end-1]/L0);
     R, Re_λ1 = _error_bound_specabs_R(x0, Matrix(F1), Matrix(F2); check=true)
