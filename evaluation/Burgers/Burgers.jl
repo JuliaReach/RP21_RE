@@ -211,7 +211,7 @@ function figure_burger_point()
                ytick = xticklatex([-1.0, -0.5, 0.0, 0.5, 1.0], 2),
                xlims=(-0.5, 0.5),
                ylims=(-1.05, 1.0),
-               bottom_margin=10mm, left_margin=6mm, right_margin=12mm, top_margin=3mm, size=(900, 600))
+               bottom_margin=10mm, left_margin=6mm, right_margin=6mm, top_margin=3mm, size=(900, 600))
 
     # model values
     n = 10
@@ -257,7 +257,7 @@ function figure_burger_set()
                ytick = xticklatex([-1.0, -0.5, 0.0, 0.5, 1.0], 2),
                xlims=(-0.5, 0.5),
                ylims=(-1.05, 1.0),
-               bottom_margin=10mm, left_margin=6mm, right_margin=12mm, top_margin=3mm, size=(900, 600))
+               bottom_margin=10mm, left_margin=6mm, right_margin=6mm, top_margin=3mm, size=(900, 600))
 
     # model values
     n = 10
