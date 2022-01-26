@@ -40,7 +40,6 @@ A = logistic(r=r, K=K, N=4);
 x0 = interval(0.5)
 R, Re_λ1 = _error_bound_specabs_R(x0, F1, F2; check=true)
 
-using Revise
 Tmax = 10.0
 
 x0set = interval(0.47, 0.53)
