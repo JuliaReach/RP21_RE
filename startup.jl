@@ -1,7 +1,7 @@
 # instantiate project
-#import Pkg
-#Pkg.activate(@__DIR__)
-#Pkg.instantiate()
+import Pkg
+Pkg.activate(@__DIR__)
+Pkg.instantiate()
 
 const TARGET_FOLDER = "results"
 const RESULTS_FILE = "results.csv"
